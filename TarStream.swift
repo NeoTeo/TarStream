@@ -116,7 +116,7 @@ enum TarStreamError : Error {
     case headerFieldMissing
 }
 
-class TarStream  : NSObject {
+public class TarStream  : NSObject {
     
     var tarReadStream: InputStream?
     var tarWriteStream: OutputStream?
@@ -133,7 +133,7 @@ class TarStream  : NSObject {
     let dmode = "755"
     let fmode = "644"
     
-    override init() {
+    public override init() {
         
         bufferSize = 2048 //bytesPerBlock
         
