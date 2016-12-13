@@ -30,7 +30,7 @@ import Foundation
 
 public struct TarHeader {
     
-    enum Field : Int {
+    public enum Field : Int {
         case fileName
         case fileMode
         case ownerId
