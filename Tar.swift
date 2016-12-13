@@ -8,7 +8,7 @@
 
 import Cocoa
 
-enum TarHeaderError : Error {
+public enum TarHeaderError : Error {
     case fileName
     case fileMode
     case ownerId
@@ -27,7 +27,7 @@ enum TarHeaderError : Error {
     case ustarPrefix
 }
 
-class Tar : NSObject {
+public class Tar : NSObject {
     
     open static let blockSize = 512
     //        parseTarHeader(in: getBytes(in: data, fromByte: 0, count: data.count))
