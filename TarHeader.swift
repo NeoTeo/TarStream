@@ -105,24 +105,24 @@ public struct TarHeader {
         case toexec  = "00001"
     }
     
-    let fileName: String
-    let fileMode: String
-    let ownerID: String
-    let groupID: String
-    let fileByteSize: String
-    let fileModTime: String
-    let headerChecksum: String
-    let fileType: String			/// The type of the file
-    let linkedFileName: String
+    public let fileName: String
+    public let fileMode: String
+    public let ownerID: String
+    public let groupID: String
+    public let fileByteSize: String
+    public let fileModTime: String
+    public let headerChecksum: String
+    public let fileType: String			/// The type of the file
+    public let linkedFileName: String
     
     // UStar Header extension
-    let magic: String		/// anything but NUL
-    let version: String
-    let uName: String
-    let gName: String
-    let devMajor: String
-    let devMinor: String
-    let prefix: String
+    public let magic: String		/// anything but NUL
+    public let version: String
+    public let uName: String
+    public let gName: String
+    public let devMajor: String
+    public let devMinor: String
+    public let prefix: String
     
     init(fileName: String,
          fileMode: String,
