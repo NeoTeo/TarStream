@@ -118,7 +118,7 @@ enum TarStreamError : Error {
 
 public class TarStream  : NSObject {
     
-    var tarReadStream: InputStream?
+    public var tarReadStream: InputStream?
     var tarWriteStream: OutputStream?
     
     
@@ -275,7 +275,7 @@ public class TarStream  : NSObject {
     }
     
     /// Called when user is done adding entries to the archive
-    func closeArchive() {
+    public func closeArchive() {
         
         //		DispatchQueue.global(qos: .default).sync {
         serialQueue.async {
