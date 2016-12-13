@@ -157,7 +157,7 @@ public class TarStream  : NSObject {
     /// that the inputstream of the first call to addEntry will finish before any
     /// subsequent calls to addEntry will. If we didn't order them sequentially we
     /// might end up with an interleaved or scrambled tar archive on the output.
-    func addEntry(header: [TarHeader.Field : String], dataStream: InputStream) {
+    public func addEntry(header: [TarHeader.Field : String], dataStream: InputStream) {
         
         serialQueue.async() {
             let sema = DispatchSemaphore(value: 0)
