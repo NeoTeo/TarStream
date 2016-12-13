@@ -36,7 +36,7 @@ public class Tar : NSObject {
     var runningTotal = 0
     var tarStream: InputStream?
     var entryHandler: ((TarHeader, InputStream, @escaping () -> Void) -> Void)?
-    var endHandler: (() -> Void)?
+    public var endHandler: (() -> Void)?
     
     /// Track the number of null blocks read to catch end of tar file.
     var nullBlocks = 0
@@ -46,7 +46,7 @@ public class Tar : NSObject {
     }
     
     /// Return an archive to which the client can add entries.
-    func archive() -> TarStream {
+    public func archive() -> TarStream {
         /** Make a read stream from which a user can read the tar stream.
          It will, when the user adds entries to the archive, make those entries
          readable as data in the Tar format.
@@ -54,11 +54,11 @@ public class Tar : NSObject {
         return TarStream()
     }
     
-    func nextEntry() {
+    public func nextEntry() {
         parse(tarStream: tarStream!)
     }
     
-    func setInputStream(tarStream: InputStream) {
+    public func setInputStream(tarStream: InputStream) {
         self.tarStream = tarStream
         //		self.tarStream!.delegate = self
         
@@ -67,7 +67,7 @@ public class Tar : NSObject {
         }
     }
     
-    func setEntryHandler(handler: @escaping ((TarHeader, InputStream, @escaping () -> Void))-> Void) {
+    public func setEntryHandler(handler: @escaping ((TarHeader, InputStream, @escaping () -> Void))-> Void) {
         entryHandler = handler
     }
     
