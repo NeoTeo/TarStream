@@ -41,7 +41,7 @@ public class Tar : NSObject {
     /// Track the number of null blocks read to catch end of tar file.
     var nullBlocks = 0
     
-    override init() {
+    public override init() {
         super.init()
     }
     
