@@ -56,7 +56,7 @@ public struct TarHeader {
     static let offsets = [(0, 100), (100, 8), (108, 8), (116, 8), (124, 12), (136, 12), (148, 8), (156, 1), (157, 100), (257, 6), (263, 2), (265, 32), (297, 32), (329, 8), (337, 8), (345, 155)]
     
     /* Types used in the fileType field. */
-    enum FileTypes : Int {
+    public enum FileTypes : Int {
         case regular			= 0
         case link				= 1
         case symbolicLink		= 2
