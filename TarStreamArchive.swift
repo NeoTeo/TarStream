@@ -160,22 +160,16 @@ public class TarStreamArchive  : NSObject {
     /// Called when user is done adding entries to the archive
     public func closeArchive() {
         
-        //		DispatchQueue.global(qos: .default).sync {
         serialQueue.async {
             /// an archive is terminated with two blocks of zeros
             let terminatorData = Array<UInt8>(repeating: 0, count: 2 * 512)
             
             //			self.write(payload: terminatorData, to: self.tarWriteStream!) {
             self.tarWriteStream!.write(payload: terminatorData) {
-                print("Archive terminated")
-                //			self.tarReadStream?.close()
-                //			self.tarReadStream?.remove(from: .main, forMode: .defaultRunLoopMode)
                 
                 self.tarWriteStream?.close()
                 self.tarWriteStream?.remove(from: .main, forMode: .defaultRunLoopMode)
             }
-            
-            print("Close archive")
         }
     }
     
