@@ -8,26 +8,6 @@
 
 import Foundation
 
-
-/*
- enum TarFileTypes : String {
-	case regular = "0"
-	case link = "1"
-	case symbolicLink = "2"
-	case characterSpecial = "3"
-	case blockSpecial = "4"
-	case directory = "5"
-	case fifo = "6"
-	case contiguousFile = "7"
- }
- 
- /// A Tar header is a dictionary
- typealias TarHeader = [TarHeaderField : String]
- 
- let TarHeaderOffsets = [(0, 100), (100, 8), (108, 8), (116, 8), (124, 12), (136, 12), (148, 8), (156, 1), (157, 100), (257, 6), (263, 2), (265, 32), (297, 32), (329, 8), (337, 8), (345, 155)]
- */
-
-
 public struct TarHeader {
     
     public enum Field : Int {
@@ -40,6 +20,7 @@ public struct TarHeader {
         case headerChecksum
         case fileType
         case linkedFileName
+
         /// ustar extension
         case magic
         case version
@@ -57,16 +38,16 @@ public struct TarHeader {
     
     /* Types used in the fileType field. */
     public enum FileTypes : Int {
-        case regular			= 0
-        case link				= 1
-        case symbolicLink		= 2
-        case characterSpecial	= 3
-        case blockSpecial		= 4
-        case directory			= 5
-        case fifo				= 6
-        case contiguousFile		= 7
+        case regular            = 0
+        case link               = 1
+        case symbolicLink       = 2
+        case characterSpecial   = 3
+        case blockSpecial       = 4
+        case directory          = 5
+        case fifo               = 6
+        case contiguousFile     = 7
         
-        case paxHeader			= 72
+        case paxHeader          = 72
         
         static func typeFor(flag: Int) -> FileTypes? {
             switch flag {
@@ -123,6 +104,7 @@ public struct TarHeader {
     public let devMajor: String
     public let devMinor: String
     public let prefix: String
+    
     
     init(fileName: String,
          fileMode: String,
