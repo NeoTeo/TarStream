@@ -164,7 +164,6 @@ public class TarStreamArchive  : NSObject {
             /// an archive is terminated with two blocks of zeros
             let terminatorData = Array<UInt8>(repeating: 0, count: 2 * 512)
             
-            //			self.write(payload: terminatorData, to: self.tarWriteStream!) {
             self.tarWriteStream!.write(payload: terminatorData) {
                 
                 self.tarWriteStream?.close()
