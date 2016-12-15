@@ -73,7 +73,7 @@ public struct TarHeader {
         case tsgid   = "02000"
         case tsvtx   = "01000"
         
-        case turead	 = "00400"
+        case turead  = "00400"
         case tuwrite = "00200"
         case tuexec  = "00100"
         
