@@ -93,7 +93,7 @@ public struct TarEntry {
     }
     
     /// Signal the end of the entry and call user end handler if it exists.
-    mutating func end() {
+    public mutating func end() {
         let rmdr = payload.count % TarStream.blockSize
         if rmdr > 0 {
             /// Align payload to nearest block size
