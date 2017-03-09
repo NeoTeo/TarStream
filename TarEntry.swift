@@ -18,7 +18,7 @@ public struct TarEntry {
     var endHandler: ((TarEntry) -> Void)?
     var stream: OutputStream?
     
-    mutating func write(data: String) {
+    public mutating func write(data: String) {
         payload += Array(data.utf8)
     }
     
