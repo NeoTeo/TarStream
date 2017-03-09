@@ -9,7 +9,7 @@
 
 import Foundation
 
-struct TarEntry {
+public struct TarEntry {
     
     typealias HeaderType = [TarHeader.Field : String]
     

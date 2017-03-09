@@ -9,7 +9,7 @@
 import Foundation
 import CallbackStreams
 
-typealias VoidFunc = (() -> Void)
+public typealias VoidFunc = (() -> Void)
 
 enum TarStreamArchiveError : Error {
     case headerFieldMissing
@@ -129,7 +129,7 @@ public class TarStreamArchive  : NSObject {
     
     
     
-    func addEntry(header: [TarHeader.Field : String], endHandler: VoidFunc? = nil) -> TarEntry {
+    public func addEntry(header: [TarHeader.Field : String], endHandler: VoidFunc? = nil) -> TarEntry {
         var entry = TarEntry()
         
         entry.header = header
