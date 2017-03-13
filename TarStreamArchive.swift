@@ -172,7 +172,7 @@ public class TarStreamArchive  : NSObject {
         }
     }
     
-    public func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
+    func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
         
         print("TarStreamArchive write called.")
         /// First write out the header

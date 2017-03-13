@@ -19,6 +19,7 @@ public struct TarEntry {
     var stream: OutputStream?
     
     public mutating func write(data: String) {
+        print("TarEntry write")
         payload += Array(data.utf8)
     }
     
