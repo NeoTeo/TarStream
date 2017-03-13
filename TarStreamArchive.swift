@@ -175,6 +175,8 @@ public class TarStreamArchive  : NSObject {
     func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
         
         print("TarStreamArchive write called.")
+        print(Thread.callStackSymbols)
+
         /// First write out the header
         let hdr = entry.makeHeaderBlob()
         
