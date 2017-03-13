@@ -128,8 +128,8 @@ public class TarStreamArchive  : NSObject {
     }
     
     
-    
     public func addEntry(header: [TarHeader.Field : String], endHandler: VoidFunc? = nil) -> TarEntry {
+        print("TarStreamArchive addEntry called.")
         var entry = TarEntry()
         
         entry.header = header
@@ -172,8 +172,9 @@ public class TarStreamArchive  : NSObject {
         }
     }
     
-    func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
+    public func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
         
+        print("TarStreamArchive write called.")
         /// First write out the header
         let hdr = entry.makeHeaderBlob()
         
