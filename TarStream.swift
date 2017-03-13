@@ -119,7 +119,6 @@ public class TarStream : NSObject {
             do {
                 /// Parse the header data...
                 let header = try self.parseTarHeader(in: data)
-                //				print("parse header: \(header)")
                 
                 /// The header data will reveal how much subsequent data to expect.
                 let dataData = [UInt8]()
@@ -132,7 +131,6 @@ public class TarStream : NSObject {
                 /// Calculate the number of bytes to read (in multiples of block sizes)
                 let byteCount = Int(ceil(Double(fileByteSize) / Double(TarStream.blockSize))) * TarStream.blockSize
                 
-                print("bytecount is \(byteCount) bytes")
                 self.read(stream: tarStream, byteCount: byteCount, readData: dataData) { data in
                     
                     /// In here we call the entry handler since we have both the header and the data.
@@ -140,7 +138,7 @@ public class TarStream : NSObject {
                     /// new stream; dataStream and pass it into the handler.
                     /// The callback we pass in should, when called, initiate the reading of the next entry.
                     /// The tarStream at this point is set to the first byte of the next header.
-                    print("Adding \(data.count) bytes to dataInputStream")
+                    
                     /// The data we put into the data stream does not need to be aligned
                     /// to the tar block size so we just add the actual data.
                     let dataStream = InputStream(data: Data(bytes: data[0 ..< fileByteSize]))
@@ -183,7 +181,7 @@ public class TarStream : NSObject {
     }
     
     func finish() {
-        print("Tar done")
+        
         endHandler?()
     }
     
@@ -231,8 +229,7 @@ public class TarStream : NSObject {
      so that it can handle the quirks and special cases of each.
      **/
     func parseTarHeader(in bytes: [UInt8]) throws -> TarHeader {
-        /// Some sanity checks
-        print("parse tar received \(bytes.count) bytes")
+        
         /// File name
         var fieldIndex = 0
 
@@ -289,7 +286,6 @@ public class TarStream : NSObject {
         /// Check for ustar format
         if let magic = headerField(at: fieldIndex, bytes: bytes), magic == "ustar" {
             fieldIndex += 1
-            print("header is ustar")
             
             /// get the ustar version
             guard let version = headerField(at: fieldIndex, bytes: bytes) else {
@@ -321,8 +317,6 @@ public class TarStream : NSObject {
                 throw TarHeaderError.ustarPrefix
             }
             fieldIndex += 1
-            
-            print("Version: \(version), uname \(uname) and gname \(gname)")
             
             return TarHeader(fileName: filename, fileMode: mode, ownerID: ownerId, groupID: groupId, fileByteSize: fileSize, fileModTime: fileModTime, headerChecksum: checksum, fileType: fileType, linkedFileName: linkName, magic: magic, version: version, uName: uname, gName: gname, devMajor: devMajor, devMinor: devMinor, prefix: prefix)
         }

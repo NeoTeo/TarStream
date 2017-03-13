@@ -58,18 +58,17 @@ public class TarStreamArchive  : NSObject {
     /// might end up with an interleaved or scrambled tar archive on the output.
     public func addEntry(header: [TarHeader.Field : String], dataStream: InputStream) {
         
+        /// Asynchronously add the block to the serial queue. The block won't return until done.
         serialQueue.async() {
             let sema = DispatchSemaphore(value: 0)
             var entry = TarEntry()
             
             var actualRead = 0
             
-            print("addEntry received input stream \(dataStream)")
-            
             /// close the entry (by writing size etc. to header)
             /// and add it to the self stream so a user can read the tar stream.
             dataStream.on(event: .endOfStream) {
-                print("the given data stream has ended. The final payload was \(String(bytes: entry.payload, encoding: String.Encoding.utf8))")
+
                 dataStream.close()
                 dataStream.remove(from: .main, forMode: .defaultRunLoopMode)
                 
@@ -93,15 +92,14 @@ public class TarStreamArchive  : NSObject {
                 entry.header[TarHeader.Field.version] = "00"
                 
                 self.close(entry: entry) {
-                    print("done writing entry!")
-                    
+                    /// Now that we've succefully closed and written the entry to 
+                    /// the output stream we can signal this entry is done.
                     sema.signal()
                 }
             }
             
-            /// read the data stream until end
+            /// read the data stream as long as it has bytes available.
             dataStream.on(event: .hasBytesAvailable) {
-                print("addEntry hasbytesavailable on input stream \(dataStream)")
                 
                 var localDat: [UInt8] = Array(repeating: 0, count: self.bytesPerBlock)
                 actualRead += dataStream.read(&localDat, maxLength: self.bytesPerBlock)
@@ -110,21 +108,12 @@ public class TarStreamArchive  : NSObject {
                 entry.payload += localDat
             }
             
-            dataStream.on(event: .openCompleted) {
-                print("we're on!")
-            }
-            
             dataStream.schedule(in: .main, forMode: .defaultRunLoopMode)
             dataStream.open()
             
-            print( "data has bytes available \(dataStream.hasBytesAvailable)")
-            print("is main thread? \(Thread.isMainThread)")
+            /// Wait for the signal that the entry has been written to the output stream.
             _ = sema.wait(timeout: .distantFuture)
-            print("past sema")
-            
         }
-        
-        //Operation.addDependency(previousOperation)
     }
     
     

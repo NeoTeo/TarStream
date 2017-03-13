@@ -76,9 +76,8 @@ struct TarEntry {
         copyData(for: .prefix, pad: false)
         
         /// As the last thing calculate the checksum of the header and add it to the header
-        let chksum = String(checksum(data: blob), radix: 8)
-        header[.headerChecksum] = chksum
-        print("the checksum is \(chksum)")
+        header[.headerChecksum] = String(checksum(data: blob), radix: 8)
+        
         copyData(for: .headerChecksum)
         
         return blob
