@@ -9,7 +9,7 @@
 import Foundation
 import CallbackStreams
 
-typealias VoidFunc = (() -> Void)
+public typealias VoidFunc = (() -> Void)
 
 enum TarStreamArchiveError : Error {
     case headerFieldMissing
@@ -117,8 +117,8 @@ public class TarStreamArchive  : NSObject {
     }
     
     
-    
-    func addEntry(header: [TarHeader.Field : String], endHandler: VoidFunc? = nil) -> TarEntry {
+    public func addEntry(header: [TarHeader.Field : String], endHandler: VoidFunc? = nil) -> TarEntry {
+        print("TarStreamArchive addEntry called.")
         var entry = TarEntry()
         
         entry.header = header
@@ -163,6 +163,9 @@ public class TarStreamArchive  : NSObject {
     
     func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
         
+        print("TarStreamArchive write called.")
+        print(Thread.callStackSymbols)
+
         /// First write out the header
         let hdr = entry.makeHeaderBlob()
         

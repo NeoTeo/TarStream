@@ -9,7 +9,7 @@
 
 import Foundation
 
-struct TarEntry {
+public struct TarEntry {
     
     typealias HeaderType = [TarHeader.Field : String]
     
@@ -18,7 +18,8 @@ struct TarEntry {
     var endHandler: ((TarEntry) -> Void)?
     var stream: OutputStream?
     
-    mutating func write(data: String) {
+    public mutating func write(data: String) {
+        print("TarEntry write")
         payload += Array(data.utf8)
     }
     
@@ -92,7 +93,7 @@ struct TarEntry {
     }
     
     /// Signal the end of the entry and call user end handler if it exists.
-    mutating func end() {
+    public mutating func end() {
         let rmdr = payload.count % TarStream.blockSize
         if rmdr > 0 {
             /// Align payload to nearest block size
