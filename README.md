@@ -7,7 +7,9 @@ The SwiftTarStream allows the reading and writing of streams encoded in the tar 
 ## Install
 
 In the Package.swift file of your project add the line
+
 `.Package(url: "https://github.com/NeoTeo/TarStream.git", majorVersion: 0)`
+
 to the dependencies section of your package definition.
 
 ## Usage
