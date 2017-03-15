@@ -76,9 +76,7 @@ public class TarStreamArchive  : NSObject {
         /// Then add/override with fields from headerFields
         for (key, value) in headerFields {
             complete[key] = value
-            print("key is \(key) and value is \(value) so we get \(complete[key])")
         }
-        print("complete is \(complete)")
         return complete
     }
     
@@ -132,7 +130,6 @@ public class TarStreamArchive  : NSObject {
                 
                     /// append the localDat to the entry's payload
                     entry.payload += localDat
-                    print("payload size \(entry.payload.count)")
                 }
             }
             
@@ -141,12 +138,10 @@ public class TarStreamArchive  : NSObject {
             dataStream.open()
        
             group.wait()
-            print("Add Entry Done")
         }
     }
     
     public func addEntry(header: [TarHeader.Field : String], endHandler: VoidFunc? = nil) -> TarEntry {
-        print("TarStreamArchive addEntry called.")
         
         let fileName = header[TarHeader.Field.fileName]
         
@@ -187,7 +182,6 @@ public class TarStreamArchive  : NSObject {
     /// Called when user is done adding entries to the archive
     public func closeArchive() {
         
-        print("TarStreamArchive close")
         serialQueue.async {
             /// an archive is terminated with two blocks of zeros
             let terminatorData = Array<UInt8>(repeating: 0, count: 2 * 512)
@@ -202,7 +196,6 @@ public class TarStreamArchive  : NSObject {
     
     func write(entry: TarEntry, to stream: OutputStream, endHandler: @escaping VoidFunc) {
         
-        print("TarStreamArchive write called.")
 
         /// First write out the header
         let hdr = entry.makeHeaderBlob()
