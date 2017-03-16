@@ -34,7 +34,7 @@ let archive = tar.archive()
 // Add an entry to the archive with the content of the read stream.
 archive.addEntry(header: [TarHeader.Field.fileName : "file.txt"], dataStream: readStream)
 
-/// Add another entry, this time empty. We set the file's expected byte size in octal.
+/// Add an empty entry. We set the file's expected byte size in octal.
 var entry: TarEntry = archive.addEntry(header: [.fileName : "greeting.txt", .fileByteSize : "12"]) {
     /// This is the entry end handler. 
     archive.closeArchive()
