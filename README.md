@@ -33,7 +33,17 @@ let archive = tar.archive()
 
 // Add an entry to the archive and finalize it.
 archive.addEntry(header: [TarHeader.Field.fileName : "file.txt"], dataStream: readStream)
-archive.closeArchive()
+
+/// File byte sizes in octal.
+var entry: TarEntry = archive.addEntry(header: [.fileName : "greeting.txt", .fileByteSize : "12"]) {
+    /// This is the entry end handler. 
+    archive.closeArchive()
+}
+
+entry.write(data: "Hej")
+entry.write(data: " ")
+entry.write(data: "Verden")
+entry.end()
 
 /// Get the read stream from the archive. 
 guard let tarStr = archive.tarReadStream else { fatalError("Cannot read archive!") }
