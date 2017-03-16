@@ -24,10 +24,14 @@ In the file where you need to use the SwiftTarStream add the following statement
 
 Swift 3
 
-## Todo:
+## Todo
 
 * Full extended tar compliance.
 * Add linkedfile support.
+
+## Notes
+
+HT to @mafintosh for inspiration.
 
 ## License
 [MIT](LICENSE)
