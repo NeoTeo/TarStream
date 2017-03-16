@@ -56,6 +56,8 @@ guard let writeStream = OutputStream(toFileAtPath: "/dev/stdout", append: false)
 tarStr.pipe(into: writeStream) { exit(EXIT_SUCCESS) }
 ```
 
+An example project using TarStream is [here](//github.com/NeoTeo/TarStreamExample)
+
 ## Requirements
 
 Swift 3
@@ -64,6 +66,7 @@ Swift 3
 
 * Full extended tar compliance.
 * Add linkedfile support.
+* Add more examples
 
 ## Notes
 
