@@ -1,4 +1,4 @@
-# SwiftTarStream
+# TarStream
 
 > A tar streaming library written in Swift.
 
@@ -19,6 +19,32 @@ In the file where you need to use the SwiftTarStream add the following statement
 `import TarStream`
 
 ## Examples
+
+To create a tar stream containing a string and output to stdout:
+
+```
+    /// Set up a read stream and feed it a string as input.
+    guard let d = "A simple stream of characters.".data(using: .utf8) else { fatalError("Invalid string!") }
+    let readStream = InputStream(data: d)
+    
+    /// Create a tar stream instance and get a new archive from it.
+    let tar = TarStream()
+    let archive = tar.archive()
+    
+    // Add an entry to the archive and finalize it.
+    archive.addEntry(header: [TarHeader.Field.fileName : "file.txt"], dataStream: readStream)
+    archive.closeArchive()
+    
+    /// Get the read stream from the archive. 
+    guard let tarStr = archive.tarReadStream else { fatalError("Cannot read archive!") }
+    
+    /// Create write stream to stdout and pipe the archive to it.
+    guard let writeStream = OutputStream(toFileAtPath: "/dev/stdout", append: false) else {
+        fatalError("Cannot create output stream!")
+    }
+    
+    tarStr.pipe(into: writeStream) { exit(EXIT_SUCCESS) }
+```
 
 ## Requirements
 
