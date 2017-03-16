@@ -20,7 +20,7 @@ In the file where you need to use the SwiftTarStream add the following statement
 
 ## Examples
 
-To create a tar stream containing a string and output to stdout:
+Create a tar stream containing two files and output it to stdout:
 
 ```Swift
 /// Set up a read stream and feed it a string as input.
