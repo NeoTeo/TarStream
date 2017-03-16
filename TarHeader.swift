@@ -93,11 +93,11 @@ public struct TarHeader {
     public let fileByteSize: String
     public let fileModTime: String
     public let headerChecksum: String
-    public let fileType: String			/// The type of the file
+    public let fileType: String         /// The type of the file
     public let linkedFileName: String
     
     // UStar Header extension
-    public let magic: String		/// anything but NUL
+    public let magic: String        /// anything but NUL
     public let version: String
     public let uName: String
     public let gName: String

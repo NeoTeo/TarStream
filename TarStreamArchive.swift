@@ -25,7 +25,7 @@ public class TarStreamArchive  : NSObject {
     let bytesPerBlock = 512
     let bufferSize: Int
     
-    //	var currentEntry: TarEntry?
+    //  var currentEntry: TarEntry?
     var archiveCloser: VoidFunc?
     var serialQueue: DispatchQueue = DispatchQueue(label: "entryWriterQ", qos: .background)
     
@@ -218,7 +218,7 @@ extension TarStreamArchive {
         case S_IFDIR: return .directory
         case S_IFIFO: return .fifo
         case S_IFLNK: return .symbolicLink
-        default:	  return .regular
+        default:      return .regular
         }
     }
 }

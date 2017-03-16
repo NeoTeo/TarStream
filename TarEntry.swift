@@ -41,7 +41,7 @@ public struct TarEntry {
             if pad == true {
                 /// pad with ascii zero
                 let b = val.lengthOfBytes(using: .ascii)
-                let zs = (size - b) - 1	/// the -2 leaves space for terminating null
+                let zs = (size - b) - 1 /// the -2 leaves space for terminating null
                 let zpad = String(repeating: "0", count: zs)
                 val = zpad + val
             }

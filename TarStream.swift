@@ -58,7 +58,7 @@ public class TarStream : NSObject {
     
     public func setInputStream(tarStream: InputStream) {
         self.tarStream = tarStream
-        //		self.tarStream!.delegate = self
+        //      self.tarStream!.delegate = self
         
         tarStream.on(event: .openCompleted) {
             self.parse(tarStream: tarStream)
@@ -142,7 +142,7 @@ public class TarStream : NSObject {
                     /// The data we put into the data stream does not need to be aligned
                     /// to the tar block size so we just add the actual data.
                     let dataStream = InputStream(data: Data(bytes: data[0 ..< fileByteSize]))
-                    //					dataStream.open()
+                    //                  dataStream.open()
                     
                     self.entryHandler?(header, dataStream, self.nextEntry)
                     
