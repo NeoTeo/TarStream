@@ -65,7 +65,7 @@ public class TarStream : NSObject {
         }
     }
     
-    public func setEntryHandler(handler: @escaping ((TarHeader, InputStream, @escaping () -> Void))-> Void) {
+    public func setEntryHandler(handler: @escaping ((TarHeader, InputStream, () -> Void))-> Void) {
         entryHandler = handler
     }
     
