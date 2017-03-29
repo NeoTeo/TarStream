@@ -1,0 +1,12 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "CallbackStreams",
+      "reason": null,
+      "repositoryURL": "https://github.com/NeoTeo/CallbackStreams.git",
+      "version": "0.1.2"
+    }
+  ],
+  "version": 1
+}
